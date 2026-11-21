@@ -19,3 +19,30 @@ Since I'm leveraging Ai in this project, I have to set a more challenging stretc
 - 5. [ ] Build a step by step state logger that logs the state of each step, including the visual representation of the 'emotion'
 - 6. [ ] Build an impossible puzzle and send the model through it
 - 7. [ ] Analyze the results to see if any step might show an emotion like 'doom' when the model passes the point of no return or recognizes the model is impossible. 
+
+# Notes
+## Implement a working version of A*
+After watching the tutorial of A* Algorithm, it seems pretty straight forward. However, it was also mentioning how it differs from Dijkstra's Algorithm. Since it brought up that algorithm, I thought I'd watch that video as well. It seems the heuristic used in A* expands directly toward the end location, whereas Dijstra's extends in every direction evenly. The tutorial walkthrough was in python. One thing that was interesting was how the instructor initialized the scores to infinity, I'll have to figure out how to do that. I did appreciate that I was able to follow the tutorial better than before. I had an Algo Expert membership before, but often didn't really follow the solutions that well, but after taking data structures, I'm following a lot easier. 
+- [x] Review Piazza
+
+### A* breakdown
+I will now explain how to implement the algorithm. Basically, there is a m x n grid full of obstacles, a start and end. The algorithm assigns each cell 3 scores, H, G, F. H is the distance from the start, G is the distance to the end (calculated using a heuristic like the Manhattan Coefficient). F is just the addition of H and G. The algorithm assigns an F score to each eligible cell in the grid and proceeds along the optimal path (lowest number), so long as the H score for a given cell doesn't increase.  The algorithm itself puts the cells in a priority queue implemented as a min heap. At each step, the algorithm will also assign to the cell an arrow for the direction of the last cell visited, so that when execution reaches the end of the grid, it can build the optimal paths by following the arrows back to the start.
+- [x] Watch A* video
+- [x] Explain the algorithm in this project
+
+## A* Complexity
+During the video on A*, it discussed how to time complexity would be O(N) if N is w x h (the number of nodes in the graph). Then find the node with the smallest f score. Instead of that we should use a priority queue implemented as a min heap, which should take time complexity  O(Nlog(N)) where N = w * h. 
+
+## Implement the A* algorithm
+One of the components of the algorithm is implementing a min heap, which we did in C++ in class, but which I got some questions wrong on the final so I wanted to dig into it a bit more. I started by looking at the algorithm in Algo expert, but then realized that for A* I can probably just use the priority_queue within the std library in C++. Nevertheless, I reimplemented min heap in python along with A* and my plan is to move it into C++. 
+
+The parts I found interesting is identifying the surrounding nodes and adding them to the neighbors array. 
+
+- [x] Implement the A* algorithm in python
+- [ ] Watch Priority queue as min heap video
+- [ ] Provision python A* with tests
+- [ ] Implement the A* in C++
+  - [ ] Look at homework assignments for min heap and project setup
+  - [ ] 'min heap construction'
+- [ ] Read messed sections on heaps sections on 
+- [ ] Watch Dijstra's algorithm video
