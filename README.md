@@ -39,8 +39,8 @@ One of the components of the algorithm is implementing a min heap, which we did 
 The parts I found interesting is identifying the surrounding nodes and adding them to the neighbors array. 
 
 - [x] Implement the A* algorithm in python
-- [ ] Watch Priority queue as min heap video
-- [ ] Provision python A* with tests
+- [x] Watch Priority queue as min heap video
+- [x] Provision python A* with tests
 - [ ] Implement the A* in C++
   - [ ] Look at homework assignments for min heap and project setup
   - [ ] 'min heap construction'
