@@ -1,0 +1,3 @@
+[submodule "src/hw-05"]
+	path = src/hw-05
+	url = https://github.com/cu-cspb2270-2025/cu-cspb-2270-fall-2026-classroom-hw-05-priority-queue-sprintup

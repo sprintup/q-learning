@@ -41,8 +41,15 @@ The parts I found interesting is identifying the surrounding nodes and adding th
 - [x] Implement the A* algorithm in python
 - [x] Watch Priority queue as min heap video
 - [x] Provision python A* with tests
+
+### Implement A* in C++
+I cloned the priority queue repo into the project to get an idea for how to structure the C++ implementation. I then had Ai generate a readme describing step by step how to set up the structure. 
 - [ ] Implement the A* in C++
-  - [ ] Look at homework assignments for min heap and project setup
-  - [ ] 'min heap construction'
-- [ ] Read messed sections on heaps sections on 
+  - [x] Look at homework assignments for min heap and project setup
+    - [x] clone it into project to get structure
+
+I got a little side tracked here learning about submodules. I added src\hw-05 as a submodule and instructions for how to restore it (if you want/need) are located in notes\submodules.md
+
+  - [x] 'min heap construction'
+- [ ] Read missed sections on heaps sections on 
 - [ ] Watch Dijstra's algorithm video
