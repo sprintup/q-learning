@@ -44,6 +44,9 @@ The parts I found interesting is identifying the surrounding nodes and adding th
 
 ### Implement A* in C++
 I cloned the priority queue repo into the project to get an idea for how to structure the C++ implementation. I then had Ai generate a readme describing step by step how to set up the structure. 
+
+The setup was pretty straight forward, however, since I am newer to C++, the CMakeLists.txt file and CMakeLists.txt.in file were new to me so I stopped to read them over and learn a bit about what they do. 
+
 - [ ] Implement the A* in C++
   - [x] Look at homework assignments for min heap and project setup
     - [x] clone it into project to get structure
