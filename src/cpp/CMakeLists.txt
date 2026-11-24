@@ -12,13 +12,16 @@ get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 string(REPLACE " " "_" ProjectId ${ProjectId})
 project(${ProjectId})
 
-# defince cmake variables for file locations
-file(GLOB USER_FILES 
-"code/*.h"
-"code/*.cpp"
+# define cmake variables for file locations.
+# The files are listed by name (instead of file(GLOB ...)), so when you add a
+# new .h/.cpp file, add it here too. CMake re-runs by itself on the next
+# `make` because this file changed.
+set(USER_FILES
+  code/AStar.h
+  code/AStar.cpp
 )
-file(GLOB TEST_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} 
-"tests/test_*.cpp"
+set(TEST_FILES
+  tests/test_a_star.cpp
 )
 
 # Try to Find GTest

@@ -94,8 +94,8 @@ src/cpp/
     └── test_a_star.cpp    (GoogleTest tests)
 ```
 
-File names are up to you. The HW repo's `CMakeLists.txt` globs whatever is in `code/` and `tests/test_*.cpp`,
-so any names work.
+File names are up to you, but `CMakeLists.txt` lists every source file by name (step 4), so any file
+you add or rename has to be listed there too.
 
 ## 4. `.gitignore` and `CMakeLists.txt`
 
@@ -125,7 +125,20 @@ cp hw-05/CMakeLists.txt.in cpp/
   `__cplusplus == 201402L`), and GoogleTest 1.10.0 only needs C++11, so the default doesn't matter.
 - With Ubuntu's CMake 3.x you'll see deprecation warnings about `cmake_minimum_required` being below 3.5.
   Those are warnings, not errors.
-- `file(GLOB ...)` only re-scans when CMake re-configures. If you add a new `.cpp` file, re-run `cmake ..` (step 6).
+- **One change from the HW repo:** instead of `file(GLOB ...)`, list the files by name. Replace the two
+  `file(GLOB ...)` blocks with:
+  ```cmake
+  set(USER_FILES
+    code/AStar.h
+    code/AStar.cpp
+  )
+  set(TEST_FILES
+    tests/test_a_star.cpp
+  )
+  ```
+  When you add a new `.h`/`.cpp` file, add it to the right list. Because `CMakeLists.txt` changed,
+  the next `make` re-runs CMake by itself, so you don't need to run `cmake ..` again. (With `GLOB`, a new
+  file is silently ignored until you re-run `cmake ..`, which is easy to forget.)
 
 ## 5. Plan the code (you write this part)
 
@@ -188,22 +201,47 @@ Before writing any A*, a good first check is an empty `main()` plus one trivial 
 (`TEST(Sanity, Works) { EXPECT_EQ(1 + 1, 2); }`), so you know the toolchain works before you start
 debugging your own code.
 
-## 7. Port the Python tests to GoogleTest
+## 7. Run the GoogleTest tests
 
-`src/python/test_a_star.py` has 8 grid cases plus 3 extra tests. A plan for `tests/test_a_star.cpp`:
+The Python tests are already ported to `tests/test_a_star.cpp`, so there's nothing to write here.
+It has the same 11 tests as `src/python/test_a_star.py`:
 
-1. `#include <gtest/gtest.h>` and `#include "../code/AStar.h"` (same pattern as the HW repo's `test_hw.cpp`).
-2. Copy the 8 grids over. Python's `[[0, 1], [1, 0]]` becomes C++'s
-   `std::vector<std::vector<int>> g = {{0, 1}, {1, 0}};`, so it's mostly swapping `[]` for `{}`.
-3. Write a `bfs_shortest_length` helper (use `std::queue`) and a `check_path` helper that does the same
-   checks as the Python one: starts at start, ends at end, never on a wall, every step is one
-   up/down/left/right move, and the length matches BFS.
-4. Write one `TEST(...)` per case, or put the cases in a `std::vector` of structs and use
-   GoogleTest's `TEST_P` / `INSTANTIATE_TEST_SUITE_P` (the C++ version of `@pytest.mark.parametrize`).
-5. Add the 3 extra tests: unreachable end returns empty, straight line with no walls, input graph unchanged.
+- **8 grid cases** (`case1_5x5` … `case8_25x25_maze`). These run through one `TEST_P` plus
+  `INSTANTIATE_TEST_SUITE_P`, GoogleTest's version of `@pytest.mark.parametrize`. Each case gets
+  its own name, like `Cases/AStarGivenCases.test_given_cases/case1_5x5`.
+- **3 extra tests**: `test_unreachable_end_returns_empty_list`, `test_straight_line_with_no_walls`,
+  and `test_does_not_modify_input_graph`.
 
-Useful assertions: `EXPECT_EQ`, `ASSERT_FALSE(path.empty())`, `EXPECT_TRUE`. Use `ASSERT_*` when the
-rest of the test would crash if it failed (for example, indexing `path[0]` on an empty path).
+Each grid case calls `check_path`, which does the same checks as the Python version: the path starts
+at the start cell and ends at the end cell, never steps on a wall, only moves one cell up/down/left/right
+at a time, and is as short as the path `bfs_shortest_length` finds.
+
+Build and run them from `src/cpp/build`:
+
+```bash
+cd /mnt/c/Users/Work/source/repos/q-learning/src/cpp/build
+cmake ..
+make
+./run_tests
+```
+
+**What to expect right now:** `code/AStar.cpp` is a stub that always returns an empty path, so
+**3 tests pass and 8 fail**. The 3 that pass are the ones where an empty path is the right answer or
+the path doesn't matter: `test_unreachable_end_returns_empty_list`, `case6_20x20_random` (its end
+cell can't be reached either), and `test_does_not_modify_input_graph`. As you implement A* in
+`AStar.cpp`, watch the failures drop to 0.
+
+Running just some of the tests:
+
+```bash
+./run_tests --gtest_filter='Cases/*'              # only the 8 grid cases
+./run_tests --gtest_filter='*case1_5x5'           # a single case
+./run_tests --gtest_filter='AStar.*'              # only the 3 extra tests
+```
+
+When a test fails, read the message under it. `check_path` tells you what was wrong, for example
+"path has 12 cells but the shortest path has 10". `./run_app` runs `app/main.cpp`, which prints the
+path for the 5x5 grid from case 1. It's handy for checking one grid by eye.
 
 ## 8. (Optional) VS Code build and debug
 
@@ -235,7 +273,7 @@ With WSL, the HW repo's `.vscode` files work as they are.
 | Deprecation warnings mentioning `cmake_minimum_required` | Normal with the HW repo's files on CMake 3.x; safe to ignore. |
 | `code: command not found` in Ubuntu | Install VS Code on Windows with "Add to PATH" checked, then open a new Ubuntu terminal. |
 | `git status` in WSL shows every file as modified | Line endings (CRLF vs LF): run `git config --global core.autocrlf input` (step 1.4). If files still show as modified with no content changes, it's file permissions on `/mnt/c`: run `git config core.filemode false` in the repo. |
-| New `.cpp` file "not found" at link time | Re-run `cmake ..` in `build/` so the `GLOB` picks it up. |
+| `undefined reference to ...` for a function in a new `.cpp` file | The file isn't in `USER_FILES` in `CMakeLists.txt`. Add it there, then run `make`. |
 | GoogleTest download fails | Needs internet the first time; after that it's cached in `build/`. |
 | `cannot execute binary file` from PowerShell | The build makes Linux programs; run them from the Ubuntu terminal. |
 

@@ -47,6 +47,8 @@ I cloned the priority queue repo into the project to get an idea for how to stru
 
 The setup was pretty straight forward, however, since I am newer to C++, the CMakeLists.txt file and CMakeLists.txt.in file were new to me so I stopped to read them over and learn a bit about what they do. 
 
+I had Ai port over the tests so I had something to work toward when implementing my version of A*. The test code is always kind of a nightmare to get to work and more sophisticated than I'm ready for at the moment. I figure this is a good compromise. At least this way I can do some test driven development. 
+
 - [ ] Implement the A* in C++
   - [x] Look at homework assignments for min heap and project setup
     - [x] clone it into project to get structure
