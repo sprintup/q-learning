@@ -49,12 +49,16 @@ The setup was pretty straight forward, however, since I am newer to C++, the CMa
 
 I had Ai port over the tests so I had something to work toward when implementing my version of A*. The test code is always kind of a nightmare to get to work and more sophisticated than I'm ready for at the moment. I figure this is a good compromise. At least this way I can do some test driven development. 
 
-- [ ] Implement the A* in C++
   - [x] Look at homework assignments for min heap and project setup
     - [x] clone it into project to get structure
-
-I got a little side tracked here learning about submodules. I added src\hw-05 as a submodule and instructions for how to restore it (if you want/need) are located in notes\submodules.md
-
   - [x] 'min heap construction'
+
+- [ ] Implement the A* in C++
+
+I got a little side tracked here learning about submodules. I added [src/hw-05](src/hw-05) as a submodule and instructions for how to restore it (if you want/need) are located in [notes/submodules.md](notes/submodules.md) Ultimately, I was trying to copy over the .vscode tasks from homework-5 so I could use the debugger, but since I cloned it instead of installing it as a submodule, git tracked a link (file mode) without a .gitmodule url to the repo. So I had to modify the history, first by going back and recloning it and removing the .git file so the files appeared in this repo normally. However, then I wanted to learn about submodules so I checked out the parent commit and installed the submodule correctly. 
+
+However, once I did that, I had changed the directory name from cu-cspb-2270-fall-2026-classroom-hw-05-priority-queue-sprintup to hw-05 for brevity, which was included in a previous commit. I then had to struggle through a git fixup using an interactive rebase that went too far back (where the original error didn't exist) which caused a great deal of confusion. I then had to reset hard my local ref to start over and use git blame to find the right commit to apply the fixup to and finally was able to update the readme to the right path. 
+
+Then I was finally able to add the tasks from the homework that would allow me to use the debugger so I can start making the tests pass. 
 - [ ] Read missed sections on heaps sections on 
 - [ ] Watch Dijstra's algorithm video
