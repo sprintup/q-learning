@@ -22,6 +22,13 @@ set(USER_FILES
 )
 set(TEST_FILES
   tests/test_a_star.cpp
+  tests/test_priority_queue.cpp
+  tests/test_my_a_star.cpp
+)
+# Your hw-05 PriorityQueue, used only by tests/test_priority_queue.cpp.
+set(HW05_FILES
+  ${CMAKE_CURRENT_SOURCE_DIR}/../hw-05/code/PriorityQueue.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/../hw-05/code/PriorityQueue.cpp
 )
 
 # Try to Find GTest
@@ -32,7 +39,7 @@ if(GTEST_FOUND)
 	include_directories(${GTEST_INCLUDE_DIRS})
 
 	# create an executable for all tests 
-	add_executable( run_tests ${TEST_FILES} ${USER_FILES} )
+	add_executable( run_tests ${TEST_FILES} ${USER_FILES} ${HW05_FILES} )
 	target_link_libraries( run_tests gtest_main ${GTEST_LIBRARIES} pthread)
 
 else()
@@ -64,7 +71,7 @@ else()
 	        EXCLUDE_FROM_ALL)
 
 	# create an executable for all tests 
-	add_executable( run_tests ${TEST_FILES} ${USER_FILES} )
+	add_executable( run_tests ${TEST_FILES} ${USER_FILES} ${HW05_FILES} )
 	target_link_libraries( run_tests gtest_main)
 endif()
 

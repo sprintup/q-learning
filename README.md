@@ -76,4 +76,7 @@ One interesting thing was that because there are so many different ways to imple
 
 I will say the tests that the Ai generated were not as helpful as the tests from class, because they essentially required a fully functional algorithm to pass. Albeit, the different tests required different sized grids, it was much more helpful for each test to test a function within the algorithm, such that they built on each other until the algorithm was implemented. However, I couldn't just ask Ai do make those kinds of tests without also asking it to define the functions themselves. Nevertheless, the scaffold was sufficient to write some tests using the TDD methodology. I'm going to commit here and then move the tests over from the hw_5 for some more examples of those kinds of tests, but don't want this commit to have Ai code in it. 
 
+### Testing 
+I brought over the test for [priority queue](src/cpp/tests/test_priority_queue.cpp) and also added a [unit testing snippet](src/cpp/.vscode/cpp.code-snippets) that I can use to make some tests. The file [test_my_a_star.cpp](src/cpp/tests/test_my_a_star.cpp) is the file that I'm going to use to write my own tests for A*. 
+
 - [ ] Watch Dijstra's algorithm video
