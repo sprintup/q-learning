@@ -1,7 +1,5 @@
 #include "AStar.h"
 
-using namespace std;
-
 vector<vector<int>> aStarAlgorithm(int startRow, int startCol,
                                    int endRow, int endCol,
                                    const vector<vector<int>>& graph) {
@@ -17,3 +15,5 @@ vector<vector<int>> aStarAlgorithm(int startRow, int startCol,
 
   return {};
 }
+
+
