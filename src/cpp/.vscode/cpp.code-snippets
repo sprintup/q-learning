@@ -1,0 +1,25 @@
+{
+  // Type "ut" then Tab in a .cpp file. Tab again to jump between fields.
+  "GoogleTest unit test (red-green-refactor)": {
+    "scope": "cpp",
+    "prefix": "ut",
+    "description": "TEST_F scaffold named SUT_INITIALCONDITION_EXPECTEDBEHAVIOR with arrange/act/assert",
+    "body": [
+      "// ${1:SUT}: when ${2:INITIALCONDITION}, expect ${3:EXPECTEDBEHAVIOR}.",
+      "//",
+      "// RED:   write this test first and run it. It must FAIL, and fail for the",
+      "//        right reason (the assert below fails because the behavior is",
+      "//        missing), not because of a typo, a crash, or a compile error.",
+      "// GREEN: write the smallest code that makes this test pass. Run all tests.",
+      "// REFACTOR: clean up the code with every test still green.",
+      "TEST_F(MY_AStar, ${1:SUT}_${2:INITIALCONDITION}_${3:EXPECTEDBEHAVIOR}) {",
+      "  // arrange",
+      "  $4",
+      "  // act",
+      "  ",
+      "  // assert - make it fail for the right reason first",
+      "  $0",
+      "}"
+    ]
+  }
+}
