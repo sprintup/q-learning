@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include <vector>
+#include "test_a_star.h"
 
 using namespace std;
 
@@ -62,3 +63,17 @@ class MY_AStar : public ::testing::Test {
 // Your A* tests
 // ---------------------------------------------------------------------------
 
+// initializeNodes: when aVectorGraph, expect aNodeGraph.
+//
+// RED:   does not return a node graph that matches the vector graph
+// GREEN: returns a node graph that matches the vector graph
+TEST_F(MY_AStar, initializeNodes_aVectorGraph_aNodeGraph) {
+  // arrange
+  Grid grid = CASES.at(0).grid;
+  // act
+  Graph graph = initializeNodes(grid);
+  
+  // assert - make it fail for the right reason first
+  ASSERT_EQ(grid.size(), graph.size());// rows (ai receommended)
+  ASSERT_EQ(grid[0].size(),graph[0].size());// cols (ai receommended)
+}

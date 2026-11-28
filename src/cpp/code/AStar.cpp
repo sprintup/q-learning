@@ -1,8 +1,6 @@
 #include "AStar.h"
 
-vector<vector<int>> aStarAlgorithm(int startRow, int startCol,
-                                   int endRow, int endCol,
-                                   const vector<vector<int>>& graph) {
+Path aStarAlgorithm(int startRow, int startCol, int endRow, int endCol, const Grid& grid) {
   // Write your code here.
   //
   // These casts only silence "unused parameter" warnings while this is a
@@ -11,9 +9,13 @@ vector<vector<int>> aStarAlgorithm(int startRow, int startCol,
   (void)startCol;
   (void)endRow;
   (void)endCol;
-  (void)graph;
+  (void)grid;
 
   return {};
 }
 
+Graph initializeNodes(Grid grid) {
+  Graph nodes;
 
+  return nodes;
+};

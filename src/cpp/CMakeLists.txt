@@ -21,9 +21,9 @@ set(USER_FILES
   code/AStar.cpp
 )
 set(TEST_FILES
+  tests/test_my_a_star.cpp
   tests/test_a_star.cpp
   tests/test_priority_queue.cpp
-  tests/test_my_a_star.cpp
 )
 # Your hw-05 PriorityQueue, used only by tests/test_priority_queue.cpp.
 set(HW05_FILES

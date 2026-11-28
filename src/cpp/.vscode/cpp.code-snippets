@@ -7,18 +7,15 @@
     "body": [
       "// ${1:SUT}: when ${2:INITIALCONDITION}, expect ${3:EXPECTEDBEHAVIOR}.",
       "//",
-      "// RED:   write this test first and run it. It must FAIL, and fail for the",
-      "//        right reason (the assert below fails because the behavior is",
-      "//        missing), not because of a typo, a crash, or a compile error.",
-      "// GREEN: write the smallest code that makes this test pass. Run all tests.",
-      "// REFACTOR: clean up the code with every test still green.",
+      "// RED:   ${4:fails on the assert because the behavior is missing}",
+      "// GREEN: ${5:passes once the smallest code change is in}",
       "TEST_F(MY_AStar, ${1:SUT}_${2:INITIALCONDITION}_${3:EXPECTEDBEHAVIOR}) {",
       "  // arrange",
-      "  $4",
+      "  $0",
       "  // act",
       "  ",
       "  // assert - make it fail for the right reason first",
-      "  $0",
+      "  ASSERT_TRUE(false) << \"not implemented yet\";",
       "}"
     ]
   }
